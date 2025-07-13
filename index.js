@@ -1,5 +1,5 @@
-const { default: makeWASocket, useSingleFileAuthState, makeInMemoryStore } = require("@whiskeysockets/baileys");
-const fs = require("fs");
+const makeWASocket = require('@whiskeysockets/baileys').default;
+const { useSingleFileAuthState, makeInMemoryStore } = require('@whiskeysockets/baileys');equire("fs");
 const P = require("pino");
 const { adminNumber, danaNumber } = require("./config");
 
