@@ -6,7 +6,9 @@ const {
 
 const fs = require("fs");
 const P = require("pino");
-const { adminNumber, danaNumber } = require("./config");= useSingleFileAuthState('./auth.json');
+const { adminNumber, danaNumber } = require("./config");
+
+const { state, saveState } = useSingleFileAuthState('./auth.json');
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 
 const connect = async () => {
@@ -14,6 +16,7 @@ const connect = async () => {
     auth: state,
     printQRInTerminal: true,
     logger: P({ level: 'silent' }),
+    store
   });
 
   sock.ev.on("creds.update", saveState);
@@ -51,7 +54,7 @@ const connect = async () => {
     if (text?.startsWith('#acc')) {
       const user = text.split(' ')[1];
       const nokos = JSON.parse(fs.readFileSync('./nokos.json'));
-      const nomorData = nokos["+62"];
+      const nomorData = nokos["+62"]; // bisa kamu sesuaikan sesuai input
 
       await sock.sendMessage(user + "@s.whatsapp.net", {
         text: `✅ Pembayaran diterima!\n📱 Nomor: ${nomorData.nomor}\n🔑 OTP: ${nomorData.otp}`
