@@ -1,9 +1,12 @@
-const makeWASocket = require('@whiskeysockets/baileys').default;
-const { useSingleFileAuthState, makeInMemoryStore } = require('@whiskeysockets/baileys');equire("fs");
-const P = require("pino");
-const { adminNumber, danaNumber } = require("./config");
+const {
+  default: makeWASocket,
+  useSingleFileAuthState,
+  makeInMemoryStore
+} = require('@whiskeysockets/baileys');
 
-const { state, saveState } = useSingleFileAuthState('./auth.json');
+const fs = require("fs");
+const P = require("pino");
+const { adminNumber, danaNumber } = require("./config");= useSingleFileAuthState('./auth.json');
 const store = makeInMemoryStore({ logger: P().child({ level: 'silent', stream: 'store' }) });
 
 const connect = async () => {
